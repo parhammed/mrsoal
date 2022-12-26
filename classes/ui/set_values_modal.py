@@ -10,6 +10,7 @@ if TYPE_CHECKING:
 
 
 class SetValueModal(discord.ui.Modal):
+    """get initial information from user"""
     title = "لطفا موارد زیر را تکمیل کنید"
     topic = discord.ui.TextInput(
         label="لطفا موضوع سوال را وارد کنید",

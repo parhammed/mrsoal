@@ -7,6 +7,7 @@ if TYPE_CHECKING:
 
 
 class SetOptionsModal(discord.ui.Modal):
+    """get initial information from user"""
     title = "لطفا گزینه های سوال را وارد کنید"
 
     correct = discord.ui.TextInput(

@@ -8,6 +8,7 @@ if TYPE_CHECKING:
 
 
 class GetOptionModal(discord.ui.Modal):
+    """get text of option from user"""
     option = discord.ui.TextInput(label="", max_length=2000)
 
     def __init__(self, index, question: "Question", view: "CreateQuestionView"):
@@ -43,10 +44,12 @@ class GetOptionModal(discord.ui.Modal):
             if len(self._view.options) >= 10:
                 self._view.add_option.disabled = True
 
-        await interaction.followup.edit_message(interaction.message.id,
-                                                view=self._view,
-                                                embed=self._question.preview(
-                                                    self._view.options,
-                                                    getattr(self._view.topic,
-                                                            "name", "general"),
-                                                    self._view.correct_option))
+        await interaction.followup.edit_message(
+            interaction.message.id,
+            view=self._view,
+            embed=self._question.preview(
+                self._view.options,
+                getattr(self._view.topic,
+                        "name", "general"),
+                self._view.correct_option)
+        )
