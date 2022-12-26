@@ -20,6 +20,7 @@ class AccessEnum(Enum):
 
 
 def is_manager():
+    """add check for the author of command is the manager or not"""
     async def predicate(ctx: commands.Context["Bot"]) -> bool:
         if getattr(ctx.guild, 'id', 0) != ctx.bot.settings['main_guild']:
             raise MissingAccessError()
@@ -32,6 +33,7 @@ def is_manager():
 
 
 def is_admin():
+    """add check for the author is admin or not"""
     async def predicate(ctx: commands.Context["Bot"]) -> bool:
         if getattr(ctx.guild, 'id', 0) != ctx.bot.settings['main_guild']:
             raise MissingAccessError()
@@ -51,6 +53,8 @@ def check_role_access(
         member: discord.Member,
         bot: "Bot",
         topic: Optional["Topic"]) -> None:
+    """check the member has enough access to use command or not
+    raise :class:`MissingAccessError` when access failed"""
     if getattr(member.guild, 'id', 0) != bot.settings['main_guild']:
         raise MissingAccessError()
 

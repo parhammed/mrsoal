@@ -25,8 +25,12 @@ class _TopicInfo:
 
 
 async def profile(
-        bot: "Bot", author: discord.Member,
+        bot: "Bot",
+        author: discord.Member,
         member: discord.Member) -> discord.Embed:
+    """
+    get information about the member and a short status of all topics
+    """
     account = await get_or_create(bot, Account, {Account.discord_id: member.id})
     question_counts = await account.get_all_question_counts()
     points = await Answer.get_all_points(bot.db, account.id)
@@ -69,13 +73,16 @@ async def profile(
 
 async def level(bot: "Bot", topic_name: str, member: discord.Member,
                 author: discord.Member) -> tuple[discord.File, discord.Embed]:
+    """get information about specific topic of the member"""
     topic_id = getattr(await Topic.get_by_name(bot, topic_name), "id", None)
     account = await get_or_create(bot, Account, {Account.discord_id: member.id})
-    question_count = await bot.db[Question.__collection_name__].count_documents({
-        Question.maker_id: account.id,
-        Question.topic_id: topic_id, Question.is_active: True,
-        Question.is_maker_hidden: False
-    })
+    question_count = await bot.db[Question.__collection_name__].count_documents(
+        {
+            Question.maker_id: account.id,
+            Question.topic_id: topic_id, Question.is_active: True,
+            Question.is_maker_hidden: False
+        }
+    )
     point = await Answer.get_point(bot.db, account.id, topic_id)
 
     test_point = point.correct - (point.incorrect / 3)

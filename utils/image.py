@@ -6,16 +6,18 @@ from utils._base import root
 
 __all__ = ("make_bars",)
 
-_image = Image.open(join(root, "media", "chart.png"))
+_chart_image = Image.open(join(root, "media", "chart.png"))
 
 
-def make_bars(bar1: int | float, bar2: int | float, bar3: int | float) -> BytesIO:
+def make_bars(bar1: int | float, bar2: int | float, bar3: int | float) \
+        -> BytesIO:
+    """make bars on the chart"""
     buf = BytesIO()
-    with _image.copy() as image:
-        i = ImageDraw.Draw(image)
+    with _chart_image.copy() as chart_image:
+        chart = ImageDraw.Draw(chart_image)
 
         if bar1 > 0:
-            i.rectangle(
+            chart.rectangle(
                 fill="#ff0000",
                 xy=(
                     (200, 500),  # down left
@@ -23,7 +25,7 @@ def make_bars(bar1: int | float, bar2: int | float, bar3: int | float) -> BytesI
                 )
             )
         if bar2 > 0:
-            i.rectangle(
+            chart.rectangle(
                 fill="#ff0000",
                 xy=(
                     (390, 500),  # down left
@@ -31,7 +33,7 @@ def make_bars(bar1: int | float, bar2: int | float, bar3: int | float) -> BytesI
                 )
             )
         if bar3 > 0:
-            i.rectangle(
+            chart.rectangle(
                 fill="#ff0000",
                 xy=(
                     (580, 500),  # down left
@@ -39,7 +41,7 @@ def make_bars(bar1: int | float, bar2: int | float, bar3: int | float) -> BytesI
                 )
             )
 
-        image.save(buf, format="PNG")
+        chart_image.save(buf, format="PNG")
 
     buf.seek(0)
     return buf

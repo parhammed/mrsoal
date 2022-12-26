@@ -14,7 +14,6 @@ from utils import root, get_or_create
 async def main():
     from main import bot
 
-
     for file in listdir(path := join(root, "questions")):
         if isfile(file_path := join(path, file)):
             with open(file_path, "r", encoding="utf-8") as f:
@@ -32,14 +31,20 @@ async def main():
                         complete_answer=question["complete_answer"],
                         is_maker_hidden=question["hidden"],
                         is_spoiler=question["spoiler"],
-                        is_active=True)).id
-                    await Option.create_complete_object(bot, content=question[
-                        "correct_option"], is_correct=True,
-                                                        question_id=question_id)
+                        is_active=True
+                    )).id
+                    await Option.create_complete_object(
+                        bot,
+                        content=question["correct_option"],
+                        is_correct=True,
+                        question_id=question_id
+                    )
                     for option in question["incorrect_options"]:
-                        await Option.create_complete_object(bot, content=option,
-                                                            is_correct=False,
-                                                            question_id=question_id)
+                        await Option.create_complete_object(
+                            bot, content=option,
+                            is_correct=False,
+                            question_id=question_id
+                        )
 
 
 if __name__ == '__main__':
