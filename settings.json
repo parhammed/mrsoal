@@ -1,0 +1,12 @@
+{
+  "token": "TOKEN",
+  "default_prefix": "q!",
+  "debug": false,
+  "engine_url": "mongodb://localhost:27017/",
+  "test_guilds": [
+    GUILD_IDs
+  ],
+  "main_guild": GUILD_ID,
+  "question_query_channel": CHANNEL_ID,
+  "admin": ROLE_ID
+}

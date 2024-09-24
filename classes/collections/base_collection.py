@@ -143,11 +143,15 @@ class BaseCollection(ABC, metaclass=MetaCollection):
         return self.__repr__()
 
     def __eq__(self, __o: "BaseCollection") -> bool:
-        if self is __o:
-            return True
-        return (isinstance(__o, self.__class__)
-                and self.id is not None
-                and self.id == __o.id)
+        return (
+                self is __o
+                or (
+                        isinstance(__o, self.__class__)
+                        and self.id is not None
+                        and  __o.id is not None
+                        and self.id == __o.id
+                )
+        )
 
     def __ne__(self, __o: "BaseCollection") -> bool:
         return not self.__eq__(__o)
@@ -169,4 +173,3 @@ class BaseCollection(ABC, metaclass=MetaCollection):
             filter={self.__class__.id: self.id},
             update={"$set": data}
         )
-

@@ -23,13 +23,13 @@ class TopicManager:
             app_commands.Choice(name=topic, value=topic)
             for topic in self.str_topics if value.lower() in topic]
 
-    def set_autocomplete(self, name: str, cmd: _command) -> _command:
-        return cmd.autocomplete(name)(self._autocomplete)
+    def set_autocomplete(self, name: str, cmd: _command) -> None:
+        cmd.autocomplete(name)(self._autocomplete)
 
     def __call__(self, name: str) -> Callable[[_command], _command]:
-        def inner(
-                cmd: discord.app_commands.AppCommand | commands.HybridCommand):
-            return cmd.autocomplete(name)(self._autocomplete)
+        def inner(cmd: _command) -> _command:
+            cmd.autocomplete(name)(self._autocomplete)
+            return cmd
 
         return inner
 

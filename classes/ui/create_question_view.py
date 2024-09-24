@@ -120,15 +120,22 @@ class CreateQuestionView(discord.ui.View):
         await interaction.response.defer()
         self.options.pop()
         self.change_option.options.pop()
+
         if self.add_option.disabled:
             self.add_option.disabled = False
+
         if len(self.options) <= 3:
             button.disabled = True
-        await interaction.message.edit(
+
+        await interaction.followup.edit_message(
+            interaction.message.id,
             embed=self._question.preview(
                 self.options,
                 getattr(self.topic, "name", "general"),
-                self.correct_option), view=self)
+                self.correct_option
+            ),
+            view=self
+        )
 
     @discord.ui.select(
         placeholder="یک گزینه را برای تغییر انتخاب کنید",

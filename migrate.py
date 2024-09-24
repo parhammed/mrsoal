@@ -19,9 +19,9 @@ async def main():
             with open(file_path, "r", encoding="utf-8") as f:
                 data = json.load(f)
                 user_id = (await get_or_create(bot, Account, {
-                    Account.discord_id.db_name: data["maker"]})).id
+                    Account.discord_id: data["maker"]})).id
                 topic_id = (
-                    await get_or_create(bot, Topic, {"name": data["topic"]})).id
+                    await get_or_create(bot, Topic, {Topic.name: data["topic"]})).id
                 for question in data['questions']:
                     question_id = (await Question.create_complete_object(
                         bot,
@@ -29,8 +29,8 @@ async def main():
                         topic_id=topic_id,
                         maker_id=user_id,
                         complete_answer=question["complete_answer"],
-                        is_maker_hidden=question["hidden"],
-                        is_spoiler=question["spoiler"],
+                        is_maker_hidden=question["is_maker_hidden"],
+                        is_spoiler=question["is_spoiler"],
                         is_active=True
                     )).id
                     await Option.create_complete_object(
@@ -41,7 +41,8 @@ async def main():
                     )
                     for option in question["incorrect_options"]:
                         await Option.create_complete_object(
-                            bot, content=option,
+                            bot,
+                            content=option,
                             is_correct=False,
                             question_id=question_id
                         )

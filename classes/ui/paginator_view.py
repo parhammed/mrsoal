@@ -26,27 +26,25 @@ class Paginator(discord.ui.View):
             self.embed.add_field(name=item[0], value=item[1], inline=False)
 
     @discord.ui.button(style=discord.ButtonStyle.primary, emoji='⏮')
-    def first(self, interaction: discord.Interaction,
-              button: discord.ui.Button):
+    async def first(self, interaction: discord.Interaction, button: discord.ui.Button):
         self._index = 0
         self.update()
         await interaction.response.edit_message(embed=self.embed, view=self)
 
     @discord.ui.button(style=discord.ButtonStyle.primary, emoji='◀️')
-    def back(self, interaction: discord.Interaction, button: discord.ui.Button):
+    async def back(self, interaction: discord.Interaction, button: discord.ui.Button):
         self._index -= 1
         self.update()
         await interaction.response.edit_message(embed=self.embed, view=self)
 
     @discord.ui.button(style=discord.ButtonStyle.primary, emoji='▶️')
-    def forward(self, interaction: discord.Interaction,
-                button: discord.ui.Button):
+    async def forward(self, interaction: discord.Interaction, button: discord.ui.Button):
         self._index += 1
         self.update()
         await interaction.response.edit_message(embed=self.embed, view=self)
 
     @discord.ui.button(style=discord.ButtonStyle.primary, emoji='⏭')
-    def last(self, interaction: discord.Interaction, button: discord.ui.Button):
+    async def last(self, interaction: discord.Interaction, button: discord.ui.Button):
         self._index = self._last_page
         self.update()
         await interaction.response.edit_message(embed=self.embed, view=self)

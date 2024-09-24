@@ -63,12 +63,15 @@ class Field(Generic[_vt]):
     def __get__(self, instance: None, owner: Type["BaseCollection"]) -> str:
         pass
 
-    def __get__(self, instance: "BaseCollection",
-                owner: Type["BaseCollection"]) -> _vt:
+    @overload
+    def __get__(self, instance: "BaseCollection", owner: Type["BaseCollection"]) -> _vt:
+        pass
+
+    def __get__(self, instance, owner):
         if instance is None:
             return self.name
-            # require to access a private attribute
-        return instance._meta_values.setdefault(self.name, self._default)  # type: ignore
+
+        return instance._meta_values.setdefault(self.name, self._default)
 
     def _validate(self, value) -> None:
         if not self._required and value is None:
@@ -81,14 +84,12 @@ class Field(Generic[_vt]):
 
     def __set__(self, instance: "BaseCollection", value):
         self._validate(value)
-        # require to access a private attribute
-        instance._meta_values[self.name] = value  # type: ignore
+        instance._meta_values[self.name] = value
 
     def validate(self, instance: "BaseCollection"):
-        """validate the instance (just this field
+        """validate the instance (just this field)
 
         :raise: when validation failed
         """
-        # require to access a private attribute
         self._validate(
             instance._meta_values.setdefault(self.name, self._default))  # type: ignore

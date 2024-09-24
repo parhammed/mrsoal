@@ -1,0 +1,69 @@
+{
+  "maker": 791387787093213235,
+  "topic": "game",
+  "questions": [
+    {
+      "content": "سری بازی های Farcry توسط کدام کمپانی ساخته شده است؟",
+      "correct_option": "Cryteck",
+      "incorrect_options": [
+        "Microsoft",
+        "Rockstar",
+        "Activision",
+        "EA",
+        "Epic Games",
+        "Bethesda"
+      ],
+      "complete_answer": "اولین بازی سری FarCry توسط شرکت Cryteck و در اواخر مارس 2004 (حدودا اوایل فروردین 1383) انتشار یافت، بعد از آن Ubisoft حق امتیاز این سری را بدست آورد و این سری را ادامه داد.",
+      "is_maker_hidden": false,
+      "is_spoiler": false
+    },
+    {
+      "content": "شخصیت اصلی بازی Grand Theft Auto: San Andreas کیست؟",
+      "correct_option": "Carl Johnson",
+      "incorrect_options": [
+        "Tommy Vercetti",
+        "Sweet Johnson",
+        "Franklin Clinton"
+      ],
+      "complete_answer": "شخصیت Tommy و Franklin به ترتیب در بازی های GTA: VC و GTA V قابل بازی هستند و شخصیت Sweet برادر Carl (شخصیت اصلی بازی) بوده و قابل بازی نیست",
+      "is_maker_hidden": false,
+      "is_spoiler": false
+    },
+    {
+      "content": "اولین بازی کامپیوتری چه بود و نوسط چه کسی یا چه کسانی ساخته شد؟",
+      "correct_option": "بازی Tennis for Two توسط William Higinbotham",
+      "incorrect_options": [
+        "بازی Pacman توسط Toru Iwatani",
+        "بازی Pong توسط Atari",
+        "بازی Gun Fight توسط Taito"
+      ],
+      "complete_answer": "اولین بازی با نام \"Tennis for Two\" توسط فیزیکدان William Higinbotham در 18 اکتبر 1958 (معادل 26 مهر 1337) ساخته شده است و سایر گیم های نام برده شده حداقل 20 سال بعد از این تاریخ ساخته شده اند",
+      "is_maker_hidden": false,
+      "is_spoiler": false
+    },
+    {
+      "content": "در بازی Minecraft با چه چیزی میتوان Crafting Table (میز ساخت و ساز) ساخت؟",
+      "correct_option": "چهار تا Wood Plank (تخته چوب)",
+      "incorrect_options": [
+        "چهار تا Wood Log (الوار)",
+        "چهار تا stick (تکه چوب)",
+        "مقداری nail (میخ) و Wood Plank (تخته چوب) همچنین به ابزار hammer (چکش) نیاز دارد"
+      ],
+      "complete_answer": "با کنار هم گزاشتن چهار تا Wood Plank بصورت 2 در 2 میتوان یک Crafting Tabel ایجاد کرد",
+      "is_maker_hidden": false,
+      "is_spoiler": false
+    },
+    {
+      "content": "کدام کامند در بازی Minecraft نسخه جاوا میتواند کلنگی بسازد که در حالت adventure بتواند سنک (stone) را بشکند",
+      "correct_option": "/give @p iron_pickaxe{canDestroy:[\"minecraft:stone\"]}",
+      "incorrect_options": [
+        "/give @p iron_pickaxe{canBreak:\"minecraft:stone\"}",
+        "/give @p iron_pickaxe{canMine=\"minecraft:stone\"}",
+        "در حالت adventure نمیتوان چیزی را شکست"
+      ],
+      "complete_answer": "اگر باور ندارید تست کنید :)",
+      "is_maker_hidden": false,
+      "is_spoiler": false
+    }
+  ]
+}

@@ -10,7 +10,10 @@ class Guild(BaseCollection):
 
     @classmethod
     async def get_prefix(cls, db, discord_id: int, default_prefix: str) -> str:
-        return (await db[cls.__collection_name__].find_one(
+        obj = await db[cls.__collection_name__].find_one(
             {cls.discord_id: discord_id},
             {cls.id: False, cls.prefix: True}
-        )).get(cls.prefix, default_prefix)
+        )
+        if obj is None:
+            return default_prefix
+        return obj.get(cls.prefix, default_prefix)

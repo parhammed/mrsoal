@@ -1,7 +1,5 @@
 from typing import TYPE_CHECKING
-
 import discord
-
 
 if TYPE_CHECKING:
     from classes.collections import Account, Option

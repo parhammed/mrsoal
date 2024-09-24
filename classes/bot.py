@@ -26,18 +26,17 @@ class Bot(commands.Bot):
             discord.Object(guild)
             for guild in self._settings["test_guilds"]
         ]
-
         # cached prefixes by guild id
         self.prefixes: dict[int, str] = {}
         self._topic_manager = TopicManager(self)
-        super(Bot, self).__init__(None, intents=discord.Intents.all())
+        super(Bot, self).__init__(self._settings['default_prefix'], intents=discord.Intents.all())
 
     async def setup_hook(self) -> None:
         self._topic_manager.start()
         await setup(self)
         for guild in self._settings["test_guilds"]:
             self.tree.copy_global_to(guild=guild)
-            await self.tree.sync(guild=guild)
+        await self.tree.sync()
 
     async def get_prefix(
             self, message: discord.Message | discord.Guild | None) \
@@ -50,14 +49,18 @@ class Bot(commands.Bot):
         if guild is not None:
             prefix = self.prefixes.get(guild.id, None)
             if prefix is None:
-                prefix = await Guild.get_prefix(
-                    self._db, guild.id,
-                    default_prefix
+                self.prefixes[guild.id] = prefix = await Guild.get_prefix(
+                    self._db,
+                    guild.id,
+                    default_prefix,
                 )
-                if prefix is None:
-                    prefix = default_prefix
-                self.prefixes[guild.id] = prefix
-        return [prefix + " ", prefix]
+        return [
+            prefix + " ", prefix,
+            f'<@{self.user.id}> ',
+            f'<@!{self.user.id}> ',
+            f'<@{self.user.id}>',
+            f'<@!{self.user.id}>',
+        ]
 
     async def on_command_error(
             self,
@@ -92,7 +95,7 @@ class Bot(commands.Bot):
     async def on_ready(self):
         await self.change_presence(activity=discord.Activity(
             type=discord.ActivityType.listening,
-            name="q! help"))
+            name=f"{self._settings['default_prefix']} help"))
         print("ready")
 
     @staticmethod
